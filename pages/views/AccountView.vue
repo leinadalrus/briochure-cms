@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import Account from '@/components/models/Account.vue'
-import Login from '@/components/services/Login.vue'
+  import Account from '@/components/models/Account.vue'
+  import Login from '@/components/services/Login.vue'
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import VideoPlayer from '@/components/services/VideoPlayer.vue'
+  import VideoPlayer from '@/components/services/VideoPlayer.vue'
 </script>
 
 <template>
