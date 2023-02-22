@@ -8,6 +8,7 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@nuxt/test-utils": "^3.2.2",
     "@types/node": "^18.14.0",
     "@videojs-player/vue": "^1.0.0",
     "nuxt": "^3.2.2",
