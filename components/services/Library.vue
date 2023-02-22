@@ -1,5 +1,5 @@
 <template>
-  <main class="p-8">
+  <main>
     <article></article>
   </main>
 </template>

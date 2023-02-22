@@ -1,7 +1,7 @@
 import { createSSRApp } from 'vue'
 import { createPinia } from 'pinia'
 
-import App from '../app.vue'
+import App from '@/app.vue'
 import router from './router'
 
 // VueVideoPlayer
