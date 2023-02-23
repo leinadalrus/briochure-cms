@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@nuxt/ui": "^0.4.1",
+    "@nuxtjs/color-mode": "^3.2.0",
     "@picocss/pico": "^1.5.7",
     "@supabase/supabase-js": "^2.8.0",
     "@testing-library/vue": "^6.6.1",
