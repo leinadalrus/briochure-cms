@@ -1,12 +1,13 @@
 <script lang="ts">
   import { createClient, useQuery } from 'urql'
-  import { supabase } from '../client/supabaseClient'
   import { reactive, ref, watch } from 'vue'
   import { onMounted } from 'vue'
 
   // Get the Supabase Public Anon Key
-  const SupabasePublicUrl = process.env.SUPABASE_PUBLIC_URL?.toString()
-  const SupabasePublicKey = process.env.SUPABASE_PUBLIC_KEY?.toString()
+  const SupabasePublicUrl = process.env.SUPABASE_URL?.toString()
+  const SupabasePublicKey = process.env.SUPABASE_KEY?.toString()
+
+  const client = useSupabaseClient<Database>()
 
   // Prepare API key and Authorization header
   export const headers = {
@@ -16,7 +17,7 @@
 
   // Create GraphQL client
   // See: https://formidable.com/open-source/urql/docs/basics/react-preact/#setting-up-the-client
-  export const client = createClient({
+  createClient({
     url: SupabasePublicUrl + '/graphql/v1',
     /*fetchOptions: function createFetchOptions() {
     return { headers }
@@ -29,11 +30,18 @@
   }
 
   // Select column and its corresponding rows
-  const { data: videos } = await supabase.from('videos').select('*')
+  // Select column and its corresponding rows
+  // const { data: videos } = await supabase.from('videos').select('*')
+  const {
+    data: videos,
+    error,
+    pending,
+    refresh,
+  } = await useFetch('/api/data/videos')
 
   // Listen to updates
   const videoData = async (data: any) => {
-    await supabase.from('videos').update('videos')
+    await client.from('videos').update('videos')
 
     handleUpdates(data)
   }
@@ -63,12 +71,12 @@
   const SupabasePostgresUri = process.env.SUPABASE_POSTGRES_URI?.toString()
 
   // SUBSCRIBE TO ALL EVENTS
-  const videosCollection = supabase
+  const videosCollection = client
     .channel('custom-all-channel')
     .on(
       'postgres_changes',
       { event: '*', schema: 'public', table: 'videos' },
-      (payload) => {
+      (payload: any) => {
         console.log('Change received!', payload)
       },
     )

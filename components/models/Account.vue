@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { onMounted, ref } from 'vue'
 
-  import { supabase } from '../client/supabaseClient'
+  const client = useSupabaseClient<Database>()
 
   const session = ref()
 
@@ -17,7 +17,7 @@
       loading.value = true
       const { user } = session.value
 
-      let { data, error, status } = await supabase
+      let { data, error, status } = await client
         .from('profiles')
         .select(`username`)
         .eq('id', user.id)
@@ -46,7 +46,7 @@
         username: username.value,
       }
 
-      let { error } = await supabase.from('profiles').upsert(updates)
+      let { error } = await client.from('profiles').upsert(updates)
 
       if (error) throw Error('Upsert function from database failed')
     } catch (error) {
@@ -59,7 +59,7 @@
   async function signOut() {
     try {
       loading.value = true
-      let { error } = await supabase.auth.signOut()
+      let { error } = await client.auth.signOut()
       if (error) throw Error('User signout failed')
     } catch (error) {
       Error('User signout encountered an error in catch')

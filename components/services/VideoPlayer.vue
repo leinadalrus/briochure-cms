@@ -3,8 +3,6 @@
   import { VideoPlayer } from '@videojs-player/vue'
   import 'video.js/dist/video-js.css'
 
-  import Caption from './Caption.vue'
-
   export default defineComponent({
     components: {
       VideoPlayer,
@@ -19,7 +17,7 @@
       <ul role="list">
         <!-- Remove top/bottom padding when first/last child -->
         <li>
-          <img src="@/assets/logo.svg" alt="" />
+          <img src="@/public/logo.svg" alt="" />
           <div>
             <p>
               {{ 'person.name' }}

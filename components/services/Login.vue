@@ -1,27 +1,28 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { supabase } from '../client/supabaseClient'
+  import { ref } from 'vue'
 
-const loading = ref(false)
-const email = ref('')
-const password = ref('')
+  const client = useSupabaseClient<Database>()
 
-const handleLogin = async () => {
-  try {
-    loading.value = true
-    const { error } = await supabase.auth.signInWithPassword({
-      email: email.value,
-      password: password.value,
-    })
-    if (error) throw Error('Check your email for the login link!')
-  } catch (error) {
-    if (error instanceof Error) {
-      throw Error(error.message)
+  const loading = ref(false)
+  const email = ref('')
+  const password = ref('')
+
+  const handleLogin = async () => {
+    try {
+      loading.value = true
+      const { error } = await client.auth.signInWithPassword({
+        email: email.value,
+        password: password.value,
+      })
+      if (error) throw Error('Check your email for the login link!')
+    } catch (error) {
+      if (error instanceof Error) {
+        throw Error(error.message)
+      }
+    } finally {
+      loading.value = false
     }
-  } finally {
-    loading.value = false
   }
-}
 </script>
 
 <template>

@@ -1,4 +1,4 @@
-import { supabase } from 'src/components/client/supabaseClient'
+const client = useSupabaseClient()
 
 addEventListener('fetch', event => {
   event.respondWith(handleRequest(event.request))

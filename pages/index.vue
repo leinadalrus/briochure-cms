@@ -1,4 +1,4 @@
-<script lang="ts">
+<script setup lang="ts">
   import HeaderMeta from '@/components/HeaderMeta.vue'
 
   // VueVideoPlayer

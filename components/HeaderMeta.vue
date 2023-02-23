@@ -1,5 +1,5 @@
 <template #nav>
-  <header>
+  <Head>
     <nav class="flex align-center text-justify-center gap-2 p-2">
       <ul>
         <li><NuxtLink to="/">Briochure</NuxtLink></li>
@@ -9,5 +9,5 @@
         <li><NuxtLink to="/about">About</NuxtLink></li>
       </ul>
     </nav>
-  </header>
+  </Head>
 </template>

@@ -3,9 +3,10 @@ function isAuthenticated(): boolean {
   return true
 }
 
-export default defineNuxtRouteMiddleware((to, from) => {
-  // isAuthenticated() is an example method verifying if a user is authenticated
-  if (isAuthenticated() === false) {
+export default defineNuxtRouteMiddleware((to, _from) => {
+  const user = useSupabaseUser()
+
+  if (!user.value) {
     return navigateTo('/login')
   }
 })
