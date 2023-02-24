@@ -1,0 +1,25 @@
+language: node_js
+node_js:
+  - lts/*
+
+branches:
+  except:
+  - master
+  - public-release-re
+
+branches:
+  only:
+  - test-debug-env
+  - dev-2-prod
+
+before_script:
+  - yarn --frozen-lockfile
+
+cache: 
+  yarn: true
+
+jobs:
+  node_js: 18.14.0
+  env: 
+  - ISOLATED=true
+  - DB=postgresql
