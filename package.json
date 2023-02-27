@@ -11,17 +11,16 @@
     "@nuxt/test-utils": "^3.2.2",
     "@nuxtjs/supabase": "^0.3.1",
     "@types/node": "^18.14.0",
-    "@videojs-player/vue": "^1.0.0",
     "nuxt": "^3.2.2",
-    "supabase": "^1.38.7",
-    "video.js": "^8.0.4"
+    "supabase": "^1.38.7"
   },
   "dependencies": {
     "@nuxt/ui": "^0.4.1",
     "@nuxtjs/color-mode": "^3.2.0",
-    "@picocss/pico": "^1.5.7",
     "@supabase/supabase-js": "^2.8.0",
     "@testing-library/vue": "^6.6.1",
+    "@vime/core": "^5.4.0",
+    "@vime/vue-next": "^5.4.0",
     "@vue/test-utils": "^2.3.0",
     "pinia": "^2.0.32",
     "urql": "^3.0.3",

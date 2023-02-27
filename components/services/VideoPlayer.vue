@@ -1,55 +1,40 @@
 <script lang="ts">
-  import { defineComponent } from 'vue'
-  import { VideoPlayer } from '@videojs-player/vue'
-  import 'video.js/dist/video-js.css'
+  // Default theme. ~960B
+  import '@vime/core/themes/default.css'
+  import { Player, Video, DefaultUi, DefaultSettings } from '@vime/vue-next'
 
-  export default defineComponent({
+  export default {
     components: {
-      VideoPlayer,
+      Player,
+      Video,
+      DefaultUi,
+      DefaultSettings,
     },
-  })
+  }
 </script>
 
-<!-- have database connection value of API URL here -->
 <template>
-  <main>
-    <article>
-      <ul role="list">
-        <!-- Remove top/bottom padding when first/last child -->
-        <li>
-          <img src="@/public/logo.svg" alt="" />
-          <div>
-            <p>
-              {{ 'person.name' }}
-            </p>
-            <p>{{ 'person.email' }}</p>
-          </div>
-        </li>
-      </ul>
-    </article>
-    <article>
-      <video-player
-        :children="[]"
-        src="Videos"
-        poster="Videos.value == 'poster'"
-        controls
-        :loop="false"
-        :volume="0.5"
-      >
-        <template v-slot="{ player, state }">
-          <div class="custom-player-controls">
-            <button
-              class="p-2 m-1"
-              @click="state.playing ? player.pause() : player.play()"
-            >
-              {{ state.playing ? 'Pause' : 'Play' }}
-            </button>
-            <button @click="player.muted(!state.muted)">
-              {{ state.muted ? 'UnMute' : 'Mute' }}
-            </button>
-          </div>
-        </template>
-      </video-player>
-    </article>
-  </main>
+  <Player controls>
+
+    <!-- Provider component is placed here. -->
+    <video crossorigin="" poster="https://media.vimejs.com/poster.png">
+      <!-- These are passed directly to the underlying HTML5 `<video>` element. -->
+      <!-- Why `data-src`? Lazy loading, you can always use `src` if you prefer.  -->
+      <source data-src="https://media.vimejs.com/720p.mp4" type="video/mp4" />
+      <track
+        default
+        kind="subtitles"
+        src="https://media.vimejs.com/subs/english.vtt"
+        srclang="en"
+        label="English"
+      />
+    </video>
+
+    <DefaultUi>
+      <!-- UI components are placed here. -->
+      <DefaultSettings pin="bottomRight">
+        <!-- We can extend the settings with new options here. -->
+      </DefaultSettings>
+    </DefaultUi>
+  </Player>
 </template>
