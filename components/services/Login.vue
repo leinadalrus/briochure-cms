@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { ref } from 'vue'
 
-  const client = useSupabaseClient<Database>()
+  const client = useSupabaseClient()
 
   const loading = ref(false)
   const email = ref('')
