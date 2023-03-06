@@ -14,12 +14,12 @@
 </script>
 
 <template>
-  <article>
-    <img v-bind:src="cardImage" alt="" id="card-article-img" />
-    <div id="card-article-header">
+  <article id="card-article">
+    <img v-bind:src="cardImage" alt="" id="article-card-image" />
+    <div id="article-card-header">
       <h1>{{ cardTitle }}</h1>
     </div>
-    <span id="card-article-body">
+    <span id="article-card-body">
       <p>
         <i>{{ cardFlavour }}</i>
       </p>
@@ -27,4 +27,16 @@
   </article>
 </template>
 
-<style></style>
+<style lang="sass">
+  #article-card
+    width: 33%
+    height: 66%
+    margin: 4px
+    padding: 4px
+
+  #article-card-image
+    width: 33% / 11%
+    height: 66% / 9%
+    margin: auto
+    padding: auto
+</style>
