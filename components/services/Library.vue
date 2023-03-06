@@ -1,5 +1,8 @@
+
+import CardLayout from '~~/layouts/CardLayout.vue';
+
 <template>
   <main>
-    <article></article>
+    <CardLayout />
   </main>
 </template>
