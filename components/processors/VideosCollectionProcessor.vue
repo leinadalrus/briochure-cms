@@ -1,4 +1,5 @@
-<script lang="ts">
+<!-- Pseudo-code: TODO(code) ... code -->
+<!-- <script lang="ts">
   import { createClient, useQuery } from 'urql'
   import { reactive, ref, watch } from 'vue'
   import { onMounted } from 'vue'
@@ -7,7 +8,7 @@
   const SupabasePublicUrl = process.env.SUPABASE_URL?.toString()
   const SupabasePublicKey = process.env.SUPABASE_KEY?.toString()
 
-  const client = useSupabaseClient<Database>()
+  const client = useSupabaseClient()
 
   // Prepare API key and Authorization header
   export const headers = {
@@ -40,11 +41,12 @@
   } = await useFetch('/api/data/videos')
 
   // Listen to updates
-  const videoData = async (data: any) => {
-    await client.from('videos').update('videos')
+  // const videoData = async (data: any) => {
+  //   await client.from('videos').update('videos')
+  // This code doesn't even update, its listening to a parameter of "never"
 
-    handleUpdates(data)
-  }
+  //   handleUpdates(data)
+  // }
 
   // Prepare API key and Authorization header
 
@@ -108,4 +110,47 @@
   })
 
   onMounted(() => {})
+</script> -->
+
+<script setup lang="js">
+    import { createClient, useQuery } from 'urql'
+
+    // Get the Supabase Public Anon Key
+    const SupabasePublicUrl = process.env.SUPABASE_URL?.toString()
+    const SupabasePublicKey = process.env.SUPABASE_KEY?.toString()
+
+    // Prepare API key and Authorization header
+    const Headers = {
+      apikey: SupabasePublicKey,
+      authorization: `Bearer ${SupabasePublicKey}`,
+    }
+
+    const client = createClient({
+    url: SupabasePublicUrl + '/graphql/v1',
+    fetchOptions: function createFetchOptions() {
+      return { Headers }
+    },
+  })
+
+  // Prepare our GraphQL query
+  const VideosQuery = `
+    query {
+      videos {
+        edges {
+          node {
+            id
+            title
+            description
+            caption
+          }
+        }
+      }
+    }
+  `
+
+  const [result, reexecuteQuery] = useQuery({
+    query: VideosQuery,
+  })
+
+  const { data, fetching, error } = result
 </script>
