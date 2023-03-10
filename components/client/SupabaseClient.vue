@@ -1,8 +1,7 @@
 <script setup lang="ts">
   import type { RealtimeChannel } from '@supabase/supabase-js'
-  import type { Database } from '~/types'
 
-  const client = useSupabaseClient<Database>()
+  const client = useSupabaseClient()
 
   let realtimeChannel: RealtimeChannel
 
