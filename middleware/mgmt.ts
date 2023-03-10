@@ -1,7 +1,14 @@
 import * as supabase from '@supabase/supabase-js'
 
+
+import { createClient } from '@supabase/supabase-js'
+
+const supabaseUrl = process.env.SUPABASE_URL
+const supabaseKey = process.env.SUPABASE_KEY
+const client = createClient(supabaseUrl?.toString()!, supabaseKey?.toString()!)
+
 async function signUp(): Promise<boolean> {
-  let { data, error } = await supabase.auth.signUp({
+  let { data, error } = await client.auth.signUp({
     email: 'someone@email.com',
     password: 'GUJMqEumzWqOxhkcDuQH',
   })
@@ -9,7 +16,7 @@ async function signUp(): Promise<boolean> {
 }
 
 async function signInWithPassword(): Promise<boolean> {
-  let { data, error } = await supabase.auth.signInWithPassword({
+  let { data, error } = await client.auth.signInWithPassword({
     email: 'someone@email.com',
     password: 'GUJMqEumzWqOxhkcDuQH',
   })
@@ -19,17 +26,17 @@ async function signInWithPassword(): Promise<boolean> {
 async function getUser(): Promise<boolean> {
   const {
     data: { user },
-  } = await supabase.auth.getUser()
+  } = await client.auth.getUser()
   return true
 }
 
-async function resetPasswordForEmail(): Promise<boolean> {
-  let { data, error } = await supabase.auth.resetPasswordForEmail(email)
+async function resetPasswordForEmail(email: string): Promise<boolean> {
+  let { data, error } = await client.auth.resetPasswordForEmail(email)
   return true
 }
 
 async function updateUser(): Promise<boolean> {
-  const { data, error } = await supabase.auth.updateUser({
+  const { data, error } = await client.auth.updateUser({
     email: 'new@email.com',
     password: 'new-password',
     data: { hello: 'world' },
@@ -38,7 +45,7 @@ async function updateUser(): Promise<boolean> {
 }
 
 async function signOut(): Promise<boolean> {
-  let { error } = await supabase.auth.signOut()
+  let { error } = await client.auth.signOut()
   return true
 }
 
