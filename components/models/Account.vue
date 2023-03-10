@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { onMounted, ref } from 'vue'
 
-  const client = useSupabaseClient<Database>()
+  const client = useSupabaseClient()
 
   const session = ref()
 
@@ -46,7 +46,7 @@
         username: username.value,
       }
 
-      let { error } = await client.from('profiles').upsert(updates)
+      let { error } = await client.from('profiles').upsert(updates.id)
 
       if (error) throw Error('Upsert function from database failed')
     } catch (error) {
